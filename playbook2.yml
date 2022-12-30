@@ -1,0 +1,35 @@
+---
+
+ - name: Playbook 2
+   hosts: webservers
+   become: true
+   tasks:
+
+   - name: Remove if nginx has repo
+     shell: rm -rf /var/www/html/*
+   - name: Install nginx
+     apt:
+      name: nginx
+      state: present
+
+   - name: Enable and start nginx
+     service:
+      name: nginx
+      enabled: true
+      state: started
+
+   - name: Remove Repo if exist
+     shell: rm -rf ~/icet2020
+
+   - name: Clone git repository
+     git:
+      repo: https://github.com/msajidaligik/gik-fcse-icet2022.git
+      dest: ~/icet2022
+
+   - name: Copy repository to nginx root
+     shell: mv ~/icet2022/* /var/www/html/
+
+   - name: Restart nginx
+     service:
+      name: nginx
+      state: restarted
