@@ -1,0 +1,51 @@
+version: '3'
+services:
+
+  control:
+    image: ubuntu
+    hostname: control
+    command: tail -f /dev/null
+    ports:
+      - "2222:22"
+    networks:
+      cs423-assignment-4:
+
+  managed1:
+    image: ubuntu
+    hostname: managed1
+    ports:
+      - "2223:22"
+    command: tail -f /dev/null
+    networks:
+      cs423-assignment-4:
+
+  managed2:
+    image: ubuntu
+    hostname: managed2
+    command: tail -f /dev/null
+    ports:
+      - "2224:22"
+    networks:
+      cs423-assignment-4:
+
+  managed3:
+    image: ubuntu
+    hostname: managed3
+    command: tail -f /dev/null
+    ports:
+      - "2225:22"
+    networks:
+      cs423-assignment-4:
+
+  managed4:
+    image: ubuntu
+    hostname: managed4
+    ports:
+      - "2226:22"
+    command: tail -f /dev/null
+    networks:
+      cs423-assignment-4:
+
+networks:
+  cs423-assignment-4:
+    driver: bridge
